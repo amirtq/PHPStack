@@ -1,0 +1,73 @@
+services:
+
+#NGINX Web Server, relies on nginx-phpfpm
+#To change the container ports edit .env file
+  nginx-web:
+    build: './nginx-and-phpfpm/nginx/build'
+    restart: unless-stopped
+    volumes:
+      - ./wwwroot:/var/www
+      - ./nginx-and-phpfpm/nginx/sites-enabled:/etc/nginx/conf.d
+      - ./nginx-and-phpfpm/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./ssl-certs:/ssl-certs
+    ports:
+      - "127.0.0.1:${NGINX_HTTP_PORT}:80"
+      - "127.0.0.1:${NGINX_HTTPS_PORT}:443"
+    links:
+      - nginx-phpfpm
+
+#PHP-FPM enables PHP for web-nginx , there is a sample NGINX file in ./nginx/sites-enabled for PHP configuration
+#To change the container ports edit .env file
+  nginx-phpfpm:
+    build: './nginx-and-phpfpm/php-fpm/build'
+    restart: unless-stopped
+    volumes:
+      - ./wwwroot:/var/www
+      - ./nginx-and-phpfpm/php-fpm/cronjobs:/etc/cron.d/cronjobs
+      - ./nginx-and-phpfpm/php-fpm/extra.ini:/usr/local/etc/php/conf.d/extra.ini
+      - ./nginx-and-phpfpm/php-fpm/extra-extensions:/usr/local/lib/php/extensions/extra-extensions
+
+#Apache2 with PHP7.4-FPM in a single container, defaut ports are 880 for HTTP annd 8443 for HTTPS, you can swap it with NGINX  ports if you want.
+#To change the container ports edit .env file
+  apache2-with-phpfpm:
+    build: './apache2-and-phpfpm/build'
+    restart: unless-stopped
+    volumes:
+      - ./wwwroot:/var/www
+      - ./apache2-and-phpfpm/cronjobs:/etc/cron.d/cronjobs
+      - ./apache2-and-phpfpm/apache2.conf:/etc/apache2/apache2.conf
+      - ./apache2-and-phpfpm/sites-enabled:/etc/apache2/sites-enabled
+      - ./apache2-and-phpfpm/php-extra.ini:/usr/local/etc/php/conf.d/extra.ini
+      - ./apache2-and-phpfpm/php-extra-extensions:/usr/local/lib/php/extensions/extra-extensions
+      - ./ssl-certs:/ssl-certs
+    ports:
+      - "127.0.0.1:${APACHE2_HTTP_PORT}:80"
+      - "127.0.0.1:${APACHE2_HTTPS_PORT}:443"
+
+
+
+#MariaDB Server, in Apache2 or NGINX use 'mariadb-10.6' as server address and 3306 as port number
+  mariadb-10.7:
+    build: './mariadb/build'
+    restart: unless-stopped
+    #To enable access to MariaDB from host system, uncomment below section and to change the container ports edit .env file 
+    #ports:
+      #- "127.0.0.1:${MARIADB_PORT}:80"
+    environment:
+    # Initial root password, changing it after first run or even deleting the container will not change the root password inside the container as it is stored in
+    # ./mariadb/data/
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - ./mariadb/data:/var/lib/mysql
+      - ./mariadb/conf.d:/etc/mysql/conf.d
+
+
+#PHPMyadmin, accessible at http://localhost:8080 after launching the containers. Username is root and password is what you have used at "MYSQL_ROOT_PASSWORD:"
+#To change the container ports edit .env file
+  phpmyadmin:
+    build: './phpmyadmin/build'
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:${PHPMYADMIN_PORT}:80"
+    environment:
+      - PMA_HOST=mariadb-10.7
