@@ -21,4 +21,6 @@ A simple and tiny docker-compose to run Apache2, NGINX, PHP-FPM and MariaDB+PHPM
 Both NGINX and Apache2 will have access to the wwwroot same as each other and at a same time, so you can test your code with both web servers in parallel.
 
 #### NGINX
--- test nginx
+- To add new virtual host, put it in './nginx-and-phpfpm/nginx/sites-enabled' then re-run containers or use 'systemctl nginx reload' inside of "nginx-web" container and use './nginx-and-phpfpm/nginx/sites-enabled/default.conf' as sample
+- To change NGINX default configuration, modify ./nginx-and-phpfpm/nginx.conf
+- To 
