@@ -10,8 +10,7 @@ A simple and tiny docker-compose to run Apache2, NGINX, PHP-FPM and MariaDB+PHPM
 - Clone the repo and run 'docker-compose up' in terminal
 ### Run in daemon mode
 - Clone the repo and run 'docker-compose up -d' in terminal
-/
-/
+
 
 
 
@@ -20,3 +19,6 @@ A simple and tiny docker-compose to run Apache2, NGINX, PHP-FPM and MariaDB+PHPM
 ### Web Servers:
 - ./wwwroot is mounted as /var/www/ to the NGINX and Apache2 containers.
 Both NGINX and Apache2 will have access to the wwwroot same as each other and at a same time, so you can test your code with both web servers in parallel.
+
+#### NGINX
+-- test nginx
