@@ -3,7 +3,7 @@
 ## What is PHPStack :
 A simple and tiny docker-compose to run Apache2, NGINX, PHP-FPM and MariaDB+PHPMyadmin with s single docker-compose command.
 ## What is NOT PHPStack :
-PHPStack is not a good choice to change tis ports from 127.0.0.0:x to 0.0.0.0:x then use for production, to keep it easy to use, there is not any server hardening, even remote root login is enabled for MariaDB!!!
+PHPStack is not a good choice to change it's ports from 127.0.0.0:x to 0.0.0.0:x then use for production, to keep it easy to use, there is not any server hardening, even remote root login is enabled for MariaDB!!!
 
 
 
