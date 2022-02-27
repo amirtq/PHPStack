@@ -4,7 +4,7 @@ RUN apt update
 RUN apt install -y nano vim systemctl cron
 RUN apt install -y zlib1g-dev libpng-dev && rm -rf /var/lib/apt/lists/*
 RUN docker-php-ext-install gd
-RUN a2enmod rewrite && a2enmod ssl && a2enmod proxy_http
+RUN a2enmod rewrite && a2enmod ssl && a2enmod proxy_http && systemctl restart apache2
 #conrtab configuration, the real cron file you need to use is located in ./apache2-and-phpfpm/cronjobs
 RUN touch /var/log/cron.log
 COPY cronhelper /etc/cron.d/cronhelper
