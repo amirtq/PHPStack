@@ -1,4 +1,16 @@
 # NEVER delete or change below line otherwise your crontab reload stops working!!!
 * * * * * crontab /etc/cron.d/cronjobs && service cron reload
 # Start writing your cronjobs after this line.
+#     ,------ MINUTE
+#    / ,----- HOUR
+#   / / ,---- DAY OF MONTH
+#  / / / ,--- MONTH
+# / / / / ,-- DAY OF WEEK
+#/ / / / /
 * * * * * echo "Hello world NGINX-PHP" >> /var/log/cron.log 2>&1
+# a sample cronjob for PHP
+# * * * * * /usr/local/bin/php /var/www/html/info.php 2>&1
+
+
+# Write your cronjobs before this line
+

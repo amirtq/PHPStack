@@ -1,1 +1,0 @@
-* * * * * crontab /etc/cron.d/cronjobs && service cron reload && echo "Init signal from cronhelper" >> /var/log/cron.log 2>&1

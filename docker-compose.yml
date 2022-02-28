@@ -27,18 +27,18 @@ services:
       - ./nginx-and-phpfpm/php-fpm/extra.ini:/usr/local/etc/php/conf.d/extra.ini
       - ./nginx-and-phpfpm/php-fpm/extra-extensions:/usr/local/lib/php/extensions/extra-extensions
 
-#Apache2 with PHP7.4-FPM in a single container, defaut ports are 880 for HTTP annd 8443 for HTTPS, you can swap it with NGINX  ports if you want.
+#Apache2 with PHP7.4 in a single container, defaut ports are 880 for HTTP annd 8443 for HTTPS, you can swap it with NGINX  ports if you want.
 #To change the container ports edit .env file
-  apache2-with-phpfpm:
-    build: './apache2-and-phpfpm/build'
+  apache2-with-php:
+    build: './apache2-and-php/build'
     restart: unless-stopped
     volumes:
       - ./wwwroot:/var/www
-      - ./apache2-and-phpfpm/cronjobs:/etc/cron.d/cronjobs
-      - ./apache2-and-phpfpm/apache2.conf:/etc/apache2/apache2.conf
-      - ./apache2-and-phpfpm/sites-enabled:/etc/apache2/sites-enabled
-      - ./apache2-and-phpfpm/php-extra.ini:/usr/local/etc/php/conf.d/extra.ini
-      - ./apache2-and-phpfpm/php-extra-extensions:/usr/local/lib/php/extensions/extra-extensions
+      - ./apache2-and-php/cronjobs:/etc/cron.d/cronjobs
+      - ./apache2-and-php/apache2.conf:/etc/apache2/apache2.conf
+      - ./apache2-and-php/sites-enabled:/etc/apache2/sites-enabled
+      - ./apache2-and-php/php-extra.ini:/usr/local/etc/php/conf.d/extra.ini
+      - ./apache2-and-php/php-extra-extensions:/usr/local/lib/php/extensions/extra-extensions
       - ./ssl-certs:/ssl-certs
     ports:
       - "127.0.0.1:${APACHE2_HTTP_PORT}:80"
