@@ -51,7 +51,7 @@ Both NGINX and Apache2 will have access to the wwwroot same as each other and at
 
 ### Database Servers
 #### MariaDB (MySQL) Server and PHPMyadmin
-- PHPMyadmin will be available on http://localhost:8080 , you can change mentioned ports by modifying the .env file.
+- PHPMyadmin will be available on http://localhost:8080 , you can change mentioned ports by modifying the .env file. The default username/password is root/root however, you can change it by modifying ./docker-compose.yml -> "MYSQL_ROOT_PASSWORD:". Keep in mind, after first run, changing the password in mentioned file will not change DB password becuase all MariaDB data files are stored permanently in ./mariadb/data .
 - MariaDB will be available to containers with server name "mariadb-10.7" on port "TCP 3306", you can change mentioned ports by modifying the .env file.
 - Data of the MariaDB including Schema and User databases wil be saved in ./mariadb/data .
 - To change MariaDB configurations, modify './mariadb/conf.d/50-server.cnf' then re-run containers or run 'systemctl restart mariadb' inside of "mariadb-10.7" container.
