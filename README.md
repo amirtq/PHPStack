@@ -34,6 +34,7 @@ Both NGINX and Apache2 will have access to the wwwroot same as each other and at
 - to change PHP configurations, there is an .ini file in './nginx-and-phpfpm/php-fpm/extra.ini' .
 - Many PHP extensions are included in the code, however, if you need to add more extensions like ioncube, use mentioned .ini file and put your extension files in './nginx-and-phpfpm/php-fpm/extra-extensions' and it will be available as '/usr/local/lib/php/extensions/extra-extensions' in the "nginx-phpfpm" container.
 - For PHP cronjobs, write your cron tasks in the './nginx-and-phpfpm/php-fpm/cronjobs' and after up tp 2 minutes, it will be automatically loaded into the "nginx-phpfpm" crontab.
+- For ioncube, the default loader is for Mac M1 with Apple Silicon, to change it to Linux or Windows, modify './apache2-and-phpfpm/php-extra.ini', comment M1 loader uncomment what you need and re-run containers.
 
 #### Apache2 and PHP for Apache2 (Both in a single container named "apache2-with-php")
 ##### Apache2 web server
@@ -45,6 +46,7 @@ Both NGINX and Apache2 will have access to the wwwroot same as each other and at
 - To change PHP configurations, there is an .ini file in './apache2-and-phpfpm/php-extra.ini' .
 - Many PHP extensions are included in the code, however, if you need to add more extensions like ioncube, use mentioned .ini file and put your extension files in './apache2-and-php/php-extra-extensions' and it will be available as '/usr/local/lib/php/extensions/extra-extensions' in the "apache2-with-php" container.
 - For PHP cronjobs, write your cron tasks in the './apache2-and-php/cronjobs' and after up to 2 minutes, it will be automatically loaded into the "apache2-with-php" crontab.
+- For ioncube, the default loader is for Mac M1 with Apple Silicon, to change it to Linux or Windows, modify './apache2-and-phpfpm/php-extra.ini', comment M1 loader uncomment what you need and re-run containers.
 
 
 ### Database Servers
